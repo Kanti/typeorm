@@ -18,9 +18,12 @@ export class PlatformTools {
     static getGlobalVariable(): any {
         if (typeof window !== "undefined") {
             return window
-        } else {
+        } else if (typeof global !== "undefined") {
             // NativeScript uses global, not window
             return global
+        } else {
+            // Web Worker uses globalThis, not window
+            return globalThis
         }
     }
 
